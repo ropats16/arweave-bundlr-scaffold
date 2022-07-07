@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import '../styles/globals.css';
+
+import { MainContext } from '../context';
+import { arweaveInit, bundlrInit } from '../utils';
 
 // Imports
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi';
@@ -56,13 +60,18 @@ const App = ({ Component, pageProps }: AppProps) => {
   const isMounted = useIsMounted();
 
   if (!isMounted) return null;
+
+  console.log(arweaveInit);
+
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider coolMode chains={chains}>
-        <NextHead>
-          <title>create-web3</title>
-        </NextHead>
-        <Component {...pageProps} />
+        <MainContext.Provider value={{}}>
+          <NextHead>
+            <title>create-web3</title>
+          </NextHead>
+          <Component {...pageProps} />
+        </MainContext.Provider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

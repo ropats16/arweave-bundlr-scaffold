@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { MainContext } from '../context';
+
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { GetGreeter, SetGreeter } from '../components/contract';
 
