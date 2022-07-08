@@ -4,8 +4,11 @@ import { MainContext } from '../context';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { GetGreeter, SetGreeter } from '../components/contract';
+import { useContext } from 'react';
 
 export default function Home() {
+  const { arweave, testweave } = useContext(MainContext);
+
   return (
     <div className={''}>
       <Head>

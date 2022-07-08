@@ -1,11 +1,10 @@
-import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import NextHead from 'next/head';
 import '../styles/globals.css';
 
 import { MainContext } from '../context';
-import { arweaveInit, bundlrInit } from '../utils';
+import { arweave, testweaveInit } from '../utils';
 
 // Imports
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi';
@@ -18,8 +17,6 @@ import {
   RainbowKitProvider,
   Chain,
 } from '@rainbow-me/rainbowkit';
-
-import { useIsMounted } from '../hooks';
 
 // Get environment variables
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_ID as string;
@@ -56,17 +53,25 @@ const wagmiClient = createClient({
   provider,
 });
 
+
 const App = ({ Component, pageProps }: AppProps) => {
-  const isMounted = useIsMounted();
+  const [testweave, setTestweave] = useState();
 
-  if (!isMounted) return null;
-
-  console.log(arweaveInit);
+  useEffect(() => {
+    const getWeave = async () => {
+      const res = await testweaveInit();
+      setTestweave(res);
+    }
+    getWeave()
+  }, [])
 
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider coolMode chains={chains}>
-        <MainContext.Provider value={{}}>
+        <MainContext.Provider value={{
+          arweave,
+          testweave
+        }}>
           <NextHead>
             <title>create-web3</title>
           </NextHead>
