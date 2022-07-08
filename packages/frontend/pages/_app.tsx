@@ -4,7 +4,7 @@ import NextHead from 'next/head';
 import '../styles/globals.css';
 
 import { MainContext } from '../context';
-import { arweave, testweaveInit } from '../utils';
+import { arweave, testweaveInit } from '../services';
 
 // Imports
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi';
@@ -55,7 +55,7 @@ const wagmiClient = createClient({
 
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [testweave, setTestweave] = useState();
+  const [testweave, setTestweave] = useState<object>({});
 
   useEffect(() => {
     const getWeave = async () => {
