@@ -55,7 +55,7 @@ const wagmiClient = createClient({
 
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [testweave, setTestweave] = useState();
+  const [testweave, setTestweave] = useState<object>({});
 
   useEffect(() => {
     const getWeave = async () => {
