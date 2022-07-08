@@ -4,7 +4,7 @@ import NextHead from 'next/head';
 import '../styles/globals.css';
 
 import { MainContext } from '../context';
-import { arweave, testweaveInit } from '../utils';
+import { arweave, testweaveInit } from '../services';
 
 // Imports
 import { chain, createClient, WagmiConfig, configureChains } from 'wagmi';
